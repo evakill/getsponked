@@ -18,7 +18,7 @@ class Game extends Component {
 
     var self = this;
 
-    var socket = io();
+    var socket = io('localhost:1337');
     socket.on('connect', function() {
       console.log('Connected to react!');
     });
@@ -78,6 +78,7 @@ class Wheel extends Component {
   render() {
     return (
       <div id="wrapper">
+        <div className="title-big">SPONK</div>
         <div id="wheel">
           <div id="inner-wheel">
             <div className="sec"><span className="fa fa-user"></span></div>
