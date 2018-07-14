@@ -1,0 +1,8 @@
+{
+  "short_name": "Sponk",
+  "name": "Get Sponked",
+  "start_url": "/",
+  "background_color": "#eaeaea",
+  "display": "standalone",
+  "theme_color": "#f24343"
+}
