@@ -13,7 +13,6 @@ class Homescreen extends React.Component {
   render() {
     return (
       <div id='wrapper'>
-        <div className="task">Warning: You must be at least 21 to play this game, please get drunk responsibly!</div>
         <button className='button' onClick={this.props.newScreen}>
         <h4>GET SPONKED.</h4>
           <ion-icon style={{fontSize: 48}} name="beer"></ion-icon>

@@ -18,7 +18,7 @@ class Game extends Component {
 
     var self = this;
 
-    var socket = io();
+    var socket = io('localhost:1337');
     socket.on('connect', function() {
       console.log('Connected to react!');
     });
@@ -82,10 +82,10 @@ class Wheel extends Component {
           <div id="inner-wheel">
             <div className="sec"><span className="fa fa-user"></span></div>
             <div className="sec"><i className="fa fa-globe"></i></div>
-            <div className="sec"><i className="fa fa-users"></i></div>
+            <div className="sec"><i className="fa fa-trophy"></i></div>
             <div className="sec"><i className="fa fa-user"></i></div>
             <div className="sec"><i className="fa fa-globe"></i></div>
-            <div className="sec"><i className="fa fa-users"></i></div>
+            <div className="sec"><i className="fa fa-trophy"></i></div>
           </div>
           <div  id="spin">
             <div id="inner-spin"></div>
@@ -103,34 +103,30 @@ class Task extends Component {
     super(props);
     this.state = {
       group: [
-        {name: 'Double Trouble', instructions: 'Pick someone for your pair, they must drink whenever you drink for one round.'},
         {name: 'Musical Chairs', instructions: 'Move your chair out of the way and the chair of the person to your left and play a song. You control when you want it to pause!'},
         {name: 'Sip sip shot', instructions: 'Like duck duck goose, but with alcohol! Everyone you tell to "sip" sips their drink. If the person you name "shot" tags you before you make it back to their chair, you take the shot'},
         {name: 'Down Up', instructions: 'Everyone look down, on the count of three look up at a random person. If you make eye contact, you both drink.'},
         {name: 'Never Have I Ever', instructions: 'You know the rules. Losers finish their drink.'},
         {name: 'Straight Face', instructions: 'First one to laugh or smile finishes their drink.'},
+        {name: 'NINJA', instructions:'EVERYONE BUST OUT INTO NINJA NOW!!! Winner gives out three sips! If you don\'t want to play, drink up.'},
       ],
-      duel: [
-        {instructions: `You must speak with a ${props.country} accent for the next 2 rounds!`},
-        {instructions: `You must let ${props.player1} call the top number of a friend/family member in your Recents!`},
-        {instructions: `Make either ${props.player1} or ${props.player2} finish their drinks.`},
-        {instructions: 'You are the question master! Anyone who answers your questions needs to drink.'},
-        {instructions: 'Whoever you pick isn\'t allowed to speak for one round.'},
-        {instructions: 'Pick someone for your pair, they must drink whenever you drink for one round.'},
-        {instructions: 'Truth or dare! Drink if you don\'t want to answer the question or do the dare the group gives you.'},
-        {instructions: 'Blind! Keep your eyes shut for one round!'},
-        {instructions: 'Pick a random player and drink as much as you want, they must drink the same amount.'}
+      individual: [
+        {name: 'Accents', instructions: `You must speak with a ${props.country} accent for the next round!`},
+        {name: 'Phone Home', instructions: `Let ${props.player1} phone the top number in your recent calls or take a drink.`},
+        {name: 'Question Master', instructions: 'You are the question master! Anyone who answers your questions needs to drink.'},
+        {name: 'Mute', instructions: 'Whoever you pick isn\'t allowed to speak for one round.'},
+        {name: 'Buddy System', instructions: 'Pick someone as your buddy, and they must drink whenever you drink for one round.'},
+        {name: 'Truth or Dare', instructions: 'Drink if you don\'t want to answer the question or do the dare the group gives you.'},
+        {name: 'Blind', instructions: 'You\'re blind! Keep your eyes shut for one round. Peek and you drink!'},
+        {name: 'Twinsies', instructions: 'Pick a random player and drink as much as you want, they must drink the same amount.'}
       ],
-      some: [
-        {instructions: `Make ${props.player1} and ${props.player2} finish their drinks. Bet on one of them against someone else.`},
-        {instructions: `You must let ${props.player1} call the top number of a friend/family member in your Recents!`},
-        {instructions:'Whoever you pick isn\'t allowed to speak for one round.'},
-        {instructions:'Pick a random player and drink as much as you want, they must drink the same amount.'},
-        {instructions: `War of the thumbs! You and ${props.player1} will have a thumb war.`},
-        {instructions: `Get in a staring contest with ${props.player1}.`},
-        {instructions:'NINJA! EVERYONE BUST OUT INTO NINJA NOW!!! Winner gives out three sips! If you don\'t want to play you must drink!'},
-        {instructions: `Play slaps with ${props.player1}, best two out of three.`},
-        {instructions: `${props.player1} and ${props.player2} need to take their shirts off. People vote on who drink.`}
+      challenge: [
+        {name: 'Drank Derby', instructions: `Make ${props.player1} and ${props.player2} finish their drink. Bet on one of them against someone else, and the loser also drinks.`},
+        {name: 'Bottoms Up', instructions: `Make either ${props.player1} or ${props.player2} finish their drink.`},
+        {name: 'War of Thumbs', instructions: `You and ${props.player1} will have a thumb war.`},
+        {name: 'Slaps', instructions: `Play slaps with ${props.player1}. Best two out of three. Loser drinks.`},
+        {name: 'Strip or Sip', instructions: `${props.player1} and ${props.player2} must take off their shirts, or take a drink.`},
+        {name: 'Staring Contest', instructions: `Get in a staring contest with ${props.player1}. Loser drinks.`},
       ],
       players: props.players,
       taskAtHand: '',
@@ -152,14 +148,16 @@ class Task extends Component {
     console.log(this.props.degree);
       if((this.props.degree >= 30 && this.props.degree < 90) || (this.props.degree >= 210 && this.props.degree < 270)){
         var i = Math.floor(Math.random() * this.state.group.length);
-        name = this.state.group[i].name;
+        name = "Group Task: " + this.state.group[i].name;
         taskAtHand = this.state.group[i].instructions;
       } else if((this.props.degree >= 90 && this.props.degree < 150) || (this.props.degree >= 270 && this.props.degree < 330)){
-        console.log(this.state.duel, Math.floor(Math.random() * this.state.duel.length))
-        taskAtHand = this.state.duel[Math.floor(Math.random() * this.state.duel.length)].instructions;
+        var i = Math.floor(Math.random() * this.state.individual.length);
+        name = "Individual Task: " + this.state.individual[i].name;
+        taskAtHand = this.state.individual[i].instructions;
       } else {
-        console.log(this.state.some, Math.floor(Math.random() * this.state.some.length))
-        taskAtHand = this.state.some[Math.floor(Math.random() * this.state.some.length)].instructions;
+        var i = Math.floor(Math.random() * this.state.challenge.length);
+        name = "Challenge Task: " + this.state.challenge[i].name;
+        taskAtHand = this.state.challenge[i].instructions;
       }
 
 
