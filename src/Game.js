@@ -131,7 +131,7 @@ class Task extends Component {
        {name: 'Strip or Sip', instructions: `${props.player1} and ${props.player2} must take off their shirts, or take a drink.`},
        {name: 'Staring Contest', instructions: `Get in a staring contest with ${props.player1}. Loser drinks.`},
        {name: 'Phone Home', instructions: `Let ${props.player1} phone the top number in your recent calls, or else you take a drink.`},
-       {name: '', instructions: ''}
+       {name: 'Few Word Do Trick', instructions: `You, ${props.player1}, and ${props.player2} can only speak using one syllable words for one word.`}
      ],
       players: props.players,
       taskAtHand: '',
