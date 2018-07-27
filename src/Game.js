@@ -170,6 +170,7 @@ class Task extends Component {
         // var name = "Group Task: " + task.name;
         // var instructions = task.instructions;
         var i = Math.floor(Math.random() * this.state.group.length);
+        console.log(i);
         name = "Group Task: " + this.state.group[i].name;
         taskAtHand = this.state.group[i].instructions;
       } else if((this.props.degree >= 90 && this.props.degree < 150) || (this.props.degree >= 270 && this.props.degree < 330)){
@@ -177,6 +178,7 @@ class Task extends Component {
         // var name = "Individual Task: " + task.name;
         // var instructions = task.instructions;
         var i = Math.floor(Math.random() * this.state.individual.length);
+        console.log(i);
         name = "Individual Task: " + this.state.individual[i].name;
         taskAtHand = this.state.individual[i].instructions;
       } else {
@@ -184,6 +186,7 @@ class Task extends Component {
         // var name = "Challenge Task: " + task.name;
         // var instructions = task.instructions;
         var i = Math.floor(Math.random() * this.state.challenge.length);
+        console.log(i);
         name = "Challenge Task: " + this.state.challenge[i].name;
         taskAtHand = this.state.challenge[i].instructions;
       }
