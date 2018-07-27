@@ -3,7 +3,6 @@ import './index.css';
 import Game from './Game.js'
 import Homescreen from './Homescreen.js'
 import PlayerScreen from './Playerscreen.js'
-import Individual from './Individual.js'
 // import { BrowserRouter } from 'react-router-dom'
 
 class App extends Component {
@@ -18,7 +17,6 @@ class App extends Component {
   }
 
   render() {
-    console.log('...')
     return (
       (this.state.Homescreen) ?
         <div id="wrapper">

@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import './index.css';
-import Individual from './Individual.js'
-import Group from './Group.js'
 import io from 'socket.io-client';
 
 class Game extends Component {
@@ -18,7 +16,7 @@ class Game extends Component {
 
     var self = this;
 
-    var socket = io('');
+    var socket = io('http://localhost:1337');
     socket.on('connect', function() {
       console.log('Connected to react!');
     });
@@ -155,21 +153,20 @@ class Task extends Component {
         backgroundColor: '#6699ff',
       }
     }
-    let taskAtHand = 'intructions';
-    let name = 'task'
+
     console.log(this.props.degree);
       if((this.props.degree >= 30 && this.props.degree < 90) || (this.props.degree >= 210 && this.props.degree < 270)){
-        var task = nextTask(this.state.group.slice());
-        name = "Group Task: " + task.name;
-        instructions = task.instructions;
+        var task = this.nextTask(this.state.group.slice());
+        var name = "Group Task: " + task.name;
+        var instructions = task.instructions;
       } else if((this.props.degree >= 90 && this.props.degree < 150) || (this.props.degree >= 270 && this.props.degree < 330)){
-        var task = nextTask(this.state.individual.slice());
-        name = "Individual Task: " + task.name;
-        instructions = task.instructions;
+        var task = this.nextTask(this.state.individual.slice());
+        var name = "Individual Task: " + task.name;
+        var instructions = task.instructions;
       } else {
-        var task = nextTask(this.state.challenge.slice());
-        name = "Challenge Task: " + task.name;
-        instructions = task.instructions;
+        var task = this.nextTask(this.state.challenge.slice());
+        var name = "Challenge Task: " + task.name;
+        var instructions = task.instructions;
       }
 
 
@@ -183,9 +180,6 @@ class Task extends Component {
     </div>
     </div>)
   }
-
-
 }
-
 
 export default Game;
