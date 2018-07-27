@@ -164,19 +164,19 @@ class Task extends Component {
         instructions = task.instructions;
       } else if((this.props.degree >= 90 && this.props.degree < 150) || (this.props.degree >= 270 && this.props.degree < 330)){
         var task = nextTask(this.state.individual.slice());
-        name = "Group Task: " + task.name;
+        name = "Individual Task: " + task.name;
         instructions = task.instructions;
       } else {
-        var i = Math.floor(Math.random() * this.state.challenge.length);
-        name = "Challenge Task: " + this.state.challenge[i].name;
-        taskAtHand = this.state.challenge[i].instructions;
+        var task = nextTask(this.state.challenge.slice());
+        name = "Challenge Task: " + task.name;
+        instructions = task.instructions;
       }
 
 
     return (<div id='wrapper'>
       <div className="task">
         <div className="task-title">{name}</div>
-        {taskAtHand}
+        {instructions}
       </div>
     <div>
       <button style={{float:'right'}} className="small-button" onClick={()=>this.props.done()}>Done</button>
