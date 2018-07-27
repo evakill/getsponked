@@ -17,7 +17,7 @@ class Game extends Component {
 
     }
     var self = this;
-    var socket = io();
+    var socket = io('localhost:1337');
     socket.on('connect', function() {
       console.log('Connected to react!');
     });
