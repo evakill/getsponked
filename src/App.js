@@ -17,6 +17,7 @@ class App extends Component {
   }
 
   render() {
+    console.log('hi')
     return (
       (this.state.Homescreen) ?
         <div id="wrapper">

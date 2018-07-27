@@ -11,11 +11,10 @@ class Game extends Component {
       degree: 0,
       country: '',
       player1: '',
-      player2: ''
+      player2: '',
+
     }
-
     var self = this;
-
     var socket = io();
     socket.on('connect', function() {
       console.log('Connected to react!');
@@ -114,34 +113,35 @@ class Task extends Component {
         {name: 'Get off your phones!', instructions: 'Everyone put their phones on the table, the first one to get notifications drinks.'},
       ],
       individual: [
-          {name: 'Accents', instructions: `You must speak with a ${props.country} accent for the next round! Forget and you drink.`},
-          {name: 'Question Master', instructions: 'You are the question master! For the next round, if you ask a question and someone answers you, they must drink. However, if they respond with \"Fuck you\" then you have to drink.'},
-          {name: 'Mute', instructions: 'Whoever you pick isn\'t allowed to speak for one round.'},
-          {name: 'Buddy System', instructions: 'Pick someone as your buddy, and they must drink whenever you drink for one round.'},
-          {name: 'Truth or Dare', instructions: 'Commit to a round of truth or dare, or else take a drink.'},
-          {name: 'Blind', instructions: 'You\'re blind! Keep your eyes shut for one round. Peek and you drink!'},
-          {name: 'American Idol', instructions: 'YOU are the next American Idol! Sing anything that comes out of your mouth this round. Talk normally and you drink!'},
-          {name: 'Genesis', instructions: 'You must end each sentence with a fake chapter and verse as if it were a bible quote for one round.'}
-        ],
+        {name: 'Accents', instructions: `You must speak with a ${props.country} accent for the next round! Forget and you drink.`},
+        {name: 'Question Master', instructions: 'You are the question master! For the next round, if you ask a question and someone answers you, they must drink. However, if they respond with \"Fuck you\" then you have to drink.'},
+        {name: 'Mute', instructions: 'Whoever you pick isn\'t allowed to speak for one round.'},
+        {name: 'Buddy System', instructions: 'Pick someone as your buddy, and they must drink whenever you drink for one round.'},
+        {name: 'Truth or Dare', instructions: 'Commit to a round of truth or dare, or else take a drink.'},
+        {name: 'Blind', instructions: 'You\'re blind! Keep your eyes shut for one round. Peek and you drink!'},
+        {name: 'American Idol', instructions: 'YOU are the next American Idol! Sing anything that comes out of your mouth this round. Talk normally and you drink!'},
+        {name: 'Genesis', instructions: 'You must end each sentence with a fake chapter and verse as if it were a bible quote for one round.'}
+      ],
       challenge: [
-       {name: 'Bottoms Up', instructions: `${props.player1} and ${props.player2} must finish their drink. Bet on who you think will finish first, and if you lose you also drink.`},
-       {name: 'War of the Thumbs', instructions: `You and ${props.player1} will have a thumb war. Loser drinks.`},
-       {name: 'Strip or Sip', instructions: `${props.player1} and ${props.player2} must take off their shirts, or take a drink.`},
-       {name: 'Staring Contest', instructions: `Get in a staring contest with ${props.player1}. Loser drinks.`},
-       {name: 'Phone Home', instructions: `Let ${props.player1} phone the top number in your recent calls, or else you take a drink.`},
-       {name: 'Few Word Do Trick', instructions: `You, ${props.player1}, and ${props.player2} can only speak using one syllable words for one word.`}
-     ],
+        {name: 'Bottoms Up', instructions: `${props.player1} and ${props.player2} must finish their drink. Bet on who you think will finish first, and if you lose you also drink.`},
+        {name: 'War of the Thumbs', instructions: `You and ${props.player1} will have a thumb war. Loser drinks.`},
+        {name: 'Strip or Sip', instructions: `${props.player1} and ${props.player2} must take off their shirts, or take a drink.`},
+        {name: 'Staring Contest', instructions: `Get in a staring contest with ${props.player1}. Loser drinks.`},
+        {name: 'Phone Home', instructions: `Let ${props.player1} phone the top number in your recent calls, or else you take a drink.`},
+        {name: 'Few Word Do Trick', instructions: `You, ${props.player1}, and ${props.player2} can only speak using one syllable words for one word.`}
+      ],
       players: props.players,
       taskAtHand: '',
       country: ''
     }
   }
 
-  nextTask(array){
-    var next = array.shift();
-    array.push(next);
-    this.setState(array);
-    return next;
+  makeTasks() {
+    console.log('hi')
+    // this.state.group.forEach(function(item) {
+    //   this.state.socket.emit('saveTask', item);
+    // })
+    this.props.done();
   }
 
   render() {
@@ -153,7 +153,8 @@ class Task extends Component {
         backgroundColor: '#6699ff',
       }
     }
-
+    let taskAtHand = 'instructions';
+    let name = 'task'
     console.log(this.props.degree);
       if((this.props.degree >= 30 && this.props.degree < 90) || (this.props.degree >= 210 && this.props.degree < 270)){
         var task = this.nextTask(this.state.group.slice());
@@ -176,7 +177,7 @@ class Task extends Component {
         {instructions}
       </div>
     <div>
-      <button style={{float:'right'}} className="small-button" onClick={()=>this.props.done()}>Done</button>
+      <button style={{float:'right'}} className="small-button" onClick={()=>this.makeTasks()}>Done</button>
     </div>
     </div>)
   }
