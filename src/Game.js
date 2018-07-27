@@ -161,27 +161,38 @@ class Task extends Component {
         backgroundColor: '#6699ff',
       }
     }
+    let taskAtHand = 'intructions';
+    let name = 'task'
 
     console.log(this.props.degree);
       if((this.props.degree >= 30 && this.props.degree < 90) || (this.props.degree >= 210 && this.props.degree < 270)){
-        var task = this.nextTask(this.tasks.group);
-        var name = "Group Task: " + task.name;
-        var instructions = task.instructions;
+        // var task = this.nextTask(this.tasks.group);
+        // var name = "Group Task: " + task.name;
+        // var instructions = task.instructions;
+        var i = Math.floor(Math.random() * this.state.group.length);
+        name = "Group Task: " + this.state.group[i].name;
+        taskAtHand = this.state.group[i].instructions;
       } else if((this.props.degree >= 90 && this.props.degree < 150) || (this.props.degree >= 270 && this.props.degree < 330)){
-        var task = this.nextTask(this.tasks.individual);
-        var name = "Individual Task: " + task.name;
-        var instructions = task.instructions;
+        // var task = this.nextTask(this.tasks.individual);
+        // var name = "Individual Task: " + task.name;
+        // var instructions = task.instructions;
+        var i = Math.floor(Math.random() * this.state.individual.length);
+        name = "Individual Task: " + this.state.individual[i].name;
+        taskAtHand = this.state.individual[i].instructions;
       } else {
-        var task = this.nextTask(this.tasks.challenge);
-        var name = "Challenge Task: " + task.name;
-        var instructions = task.instructions;
+        // var task = this.nextTask(this.tasks.challenge);
+        // var name = "Challenge Task: " + task.name;
+        // var instructions = task.instructions;
+        var i = Math.floor(Math.random() * this.state.challenge.length);
+        name = "Challenge Task: " + this.state.challenge[i].name;
+        taskAtHand = this.state.challenge[i].instructions;
       }
 
 
     return (<div id='wrapper'>
       <div className="task">
         <div className="task-title">{name}</div>
-        {instructions}
+        {taskAtHand}
       </div>
     <div>
       <button style={{float:'right'}} className="small-button" onClick={()=>this.makeTasks()}>Done</button>
