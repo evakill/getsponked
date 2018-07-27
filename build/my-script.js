@@ -4,7 +4,7 @@ var degree = 1800;
 //number of clicks = 0
 var clicks = 0;
 
-var socket = io();
+var socket = io('http://localhost:1337');
   socket.on('connect', function() {
     console.log('Connected!');
   });

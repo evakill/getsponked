@@ -99,7 +99,7 @@ class Wheel extends Component {
 class Task extends Component {
   constructor(props){
     super(props);
-    this.state = {
+    this.tasks = {
       group: [
         {name: 'Sip sip shot', instructions: 'Like duck duck goose, but with alcohol! Walk around the circle and tap each player on the head in order, saying either "sip" or "shot". Everyone you tell to "sip" sips their drink. Choose one person to call "shot". This person will then chase you around the table. If they tag you before you get back to their seat and sit down, you lose and take the shot. If you make it back safely, they drink.'},
         {name: 'Down Up', instructions: 'Everyone look down. On the count of three everyone looks up at a random person. If any two players make eye contact, they both drink.'},
@@ -130,6 +130,8 @@ class Task extends Component {
         {name: 'Phone Home', instructions: `Let ${props.player1} phone the top number in your recent calls, or else you take a drink.`},
         {name: 'Few Word Do Trick', instructions: `You, ${props.player1}, and ${props.player2} can only speak using one syllable words for one word.`}
       ],
+    }
+    this.state = {
       players: props.players,
       taskAtHand: '',
       country: ''
@@ -144,6 +146,12 @@ class Task extends Component {
     this.props.done();
   }
 
+  nextTask(array){
+    var task = array.shift();
+    array.push(task);
+    return task;
+  }
+
   render() {
     const styles = {
       container: {
@@ -153,19 +161,18 @@ class Task extends Component {
         backgroundColor: '#6699ff',
       }
     }
-    let taskAtHand = 'instructions';
-    let name = 'task'
+
     console.log(this.props.degree);
       if((this.props.degree >= 30 && this.props.degree < 90) || (this.props.degree >= 210 && this.props.degree < 270)){
-        var task = this.nextTask(this.state.group.slice());
+        var task = this.nextTask(this.tasks.group);
         var name = "Group Task: " + task.name;
         var instructions = task.instructions;
       } else if((this.props.degree >= 90 && this.props.degree < 150) || (this.props.degree >= 270 && this.props.degree < 330)){
-        var task = this.nextTask(this.state.individual.slice());
+        var task = this.nextTask(this.tasks.individual);
         var name = "Individual Task: " + task.name;
         var instructions = task.instructions;
       } else {
-        var task = this.nextTask(this.state.challenge.slice());
+        var task = this.nextTask(this.tasks.challenge);
         var name = "Challenge Task: " + task.name;
         var instructions = task.instructions;
       }
