@@ -139,6 +139,13 @@ class Task extends Component {
     }
   }
 
+  nextTask(array){
+    var next = array.shift();
+    array.push(next);
+    this.setState(array);
+    return next;
+  }
+
   render() {
     const styles = {
       container: {
@@ -152,13 +159,13 @@ class Task extends Component {
     let name = 'task'
     console.log(this.props.degree);
       if((this.props.degree >= 30 && this.props.degree < 90) || (this.props.degree >= 210 && this.props.degree < 270)){
-        var i = Math.floor(Math.random() * this.state.group.length);
-        name = "Group Task: " + this.state.group[i].name;
-        taskAtHand = this.state.group[i].instructions;
+        var task = nextTask(this.state.group.slice());
+        name = "Group Task: " + task.name;
+        instructions = task.instructions;
       } else if((this.props.degree >= 90 && this.props.degree < 150) || (this.props.degree >= 270 && this.props.degree < 330)){
-        var i = Math.floor(Math.random() * this.state.individual.length);
-        name = "Individual Task: " + this.state.individual[i].name;
-        taskAtHand = this.state.individual[i].instructions;
+        var task = nextTask(this.state.individual.slice());
+        name = "Group Task: " + task.name;
+        instructions = task.instructions;
       } else {
         var i = Math.floor(Math.random() * this.state.challenge.length);
         name = "Challenge Task: " + this.state.challenge[i].name;
