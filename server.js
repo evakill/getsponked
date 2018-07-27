@@ -47,7 +47,7 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-var port = process.env.PORT || 1337;
+var port = process.env.PORT || 3000;
 server.listen(port, function(){
   console.log('listening on ' + port);
 })
